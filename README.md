@@ -9,4 +9,5 @@ You can download the derain dataset from http://www.icst.pku.edu.cn/struct/Proje
 
 ## Model Usage
 The model file for derain filter in FFmpeg is models_for_test/derain_espcn.model. It is a native version model, so can be used in FFmpeg derain filter directly by the following command:
-	ffmpeg -i derain_input.mp4 -vf derain=model=derain_espcn.model derain_output.mp4
+
+    ffmpeg -i derain_input.mp4 -vf derain=model=derain_espcn.model derain_output.mp4
