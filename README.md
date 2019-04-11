@@ -1,4 +1,4 @@
-# derain_filter
+# Derain Filter
 This repo is a part of GSoC2019 project for derain filter in FFmpeg.
 
 This repo contains TensorFlow implementations of image derain filter based on the following models (we made some modifications to ESPCN in order to make it work for derain task):
