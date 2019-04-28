@@ -22,7 +22,7 @@ This test set is produced with generate_datasets.sh script and consists of test 
 
 Model | PSNR  | SSIM  |
 ----- | :---: | :---: |
-CAN   | 22.66 | 66.82 |
+CAN   | 22.18 | 66.03 |
 
 ## Thanks to the Third Party Libs
 [SR](https://github.com/HighVoltageRocknRoll/sr)

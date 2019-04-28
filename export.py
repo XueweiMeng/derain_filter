@@ -54,16 +54,17 @@ def get_arguments():
 def write_conv_layer(kernel, bias, dilation_rate, padding, activation,
                      model_file):
     kernel = np.transpose(kernel, [3, 0, 1, 2])
-    param = np.array([dilation_rate, padding.value, activation.value,
-                      kernel.shape[3], kernel.shape[0], kernel.shape[1]],
-                     dtype=np.uint32)
+    param = np.array(
+        [Layer.Conv.value, dilation_rate, padding.value, activation.value,
+         kernel.shape[3], kernel.shape[0], kernel.shape[1]], dtype=np.int32)
+    print(param)
     param.tofile(model_file)
     kernel.tofile(model_file)
     bias.tofile(model_file)
 
 
 def write_to_weight_file(weights, model_file, net_depth):
-    np.array([net_depth], dtype=np.uint32).tofile(model_file)
+    np.array([net_depth], dtype=np.int32).tofile(model_file)
     write_conv_layer(
         kernel=weights['can/enc/kernel:0'],
         bias=weights['can/enc/bias:0'],
@@ -81,13 +82,13 @@ def write_to_weight_file(weights, model_file, net_depth):
             model_file=model_file)
     write_conv_layer( 
         kernel=weights['can/dec1/kernel:0'],
-        bias=weights['can/dec2/bias:0'],
+        bias=weights['can/dec1/bias:0'],
         dilation_rate=1,
         padding=Padding.Same,
         activation=Activation.LeakyRelu,
         model_file=model_file)
     write_conv_layer( 
-        kernel=weights['can/dec1/kernel:0'],
+        kernel=weights['can/dec2/kernel:0'],
         bias=weights['can/dec2/bias:0'],
         dilation_rate=1,
         padding=Padding.Same,

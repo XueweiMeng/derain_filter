@@ -8,7 +8,7 @@ import tqdm
 import dataset
 import model
 
-BATCH_SIZE = 4
+BATCH_SIZE = 1
 CHANNEL_NUM = 24
 NET_DEPTH = 7
 DATASET_PATH = 'dataset.tfrecords'
