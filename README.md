@@ -5,6 +5,9 @@ This repo contains TensorFlow implementations of following single image derainin
 
 This repo is a part of GSoC project for derain filter in ffmpeg.
 
+## Dataset Preparation
+You can download the derain dataset from http://www.icst.pku.edu.cn/struct/Projects/joint_rain_removal.html for training or testing.
+
 ## Model training
 1. Prepare Rain100H dataset as repo [RESCAN](https://github.com/XiaLiPKU/RESCAN)
 2. cd scripts
@@ -23,6 +26,11 @@ This test set is produced with generate_datasets.sh script and consists of test 
 Model | PSNR  | SSIM  |
 ----- | :---: | :---: |
 CAN   | 22.18 | 66.03 |
+
+## Usage of derain filter
+The model file for derain filter in FFmpeg is models_for_test/derain_RESCAN.model. It is a native version model, so can be used in FFmpeg derain filter directly by the following command:
+
+    ffmpeg -i derain_input.mp4 -vf derain=model=derain_espcn.model derain_output.mp4
 
 ## Thanks to the Third Party Libs
 [SR](https://github.com/HighVoltageRocknRoll/sr)
