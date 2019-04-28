@@ -1,4 +1,8 @@
+import functools
 import tensorflow as tf
+
+conv2d = functools.partial(tf.layers.conv2d, padding='same', 
+                           kernel_initializer=tf.keras.initializers.he_normal())
 
 
 class Model(object):
@@ -9,17 +13,16 @@ class Model(object):
 
     def forward(self, O):
         with tf.variable_scope('can'):
-            x = tf.layers.conv2d(O, self.channel, 3, padding='same',
-                                 activation=tf.nn.leaky_relu, name='enc')
+            x = conv2d(O, self.channel, 3, activation=tf.nn.leaky_relu,
+                       name='enc')
             for i in range(self.depth - 3):
                 dilation = 2 ** i
-                x = tf.layers.conv2d(x, self.channel, 3, padding='same', 
-                                     dilation_rate=(dilation, dilation),
-                                     activation=tf.nn.leaky_relu, 
-                                     name='conv'+str(i))
-            x = tf.layers.conv2d(x, self.channel, 3, padding='same', 
-                                 activation=tf.nn.leaky_relu, name='dec1')
-            O_R = tf.layers.conv2d(x, 3, 1, padding='same', name='dec2')
+                x = conv2d(x, self.channel, 3, activation=tf.nn.leaky_relu,
+                           dilation_rate=(dilation, dilation), 
+                           name='conv'+str(i))
+            x = conv2d(x, self.channel, 3, activation=tf.nn.leaky_relu,
+                       name='dec1')
+            O_R = conv2d(x, 3, 1, activation=None, name='dec2')
 
         return O_R
 
