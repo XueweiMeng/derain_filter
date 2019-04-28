@@ -1,9 +1,9 @@
-# Image super resolution
+# Derain Filter in FFmpeg
 
 This repo contains TensorFlow implementations of following single image deraining models:
 * SCAN &mdash; "Recurrent Squeeze-and-Excitation Context Aggregation Net for Single Image Deraining" [[arxiv]](https://arxiv.org/abs/1807.05698)
 
-This repo is a part of GSoC project for super resolution filter in ffmpeg.
+This repo is a part of GSoC project for derain filter in ffmpeg.
 
 ## Model training
 1. Prepare Rain100H dataset as repo [RESCAN](https://github.com/XiaLiPKU/RESCAN)
