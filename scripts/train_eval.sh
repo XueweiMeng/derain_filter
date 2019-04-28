@@ -1,6 +1,6 @@
 #!/bin/bash
-TRAIN_LOGDIR=logdir/train_60k
-TEST_LOGDIR=logdir/test_60k
+TRAIN_LOGDIR=logdir/train
+TEST_LOGDIR=logdir/test
 TRAIN_DATASET_PATH=datasets/train_Rain100H/dataset.tfrecords
 TEST_DATASET_PATH=datasets/test_Rain100H/dataset.tfrecords
 TRAIN_STEPS=60000
