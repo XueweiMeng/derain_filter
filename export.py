@@ -26,7 +26,7 @@ class Activation(enum.Enum):
     Tanh = 1
     Sigmoid = 2
     Null = 3
-    Leaky_relu = 4
+    LeakyRelu = 4
 
 
 @enum.unique
@@ -69,7 +69,7 @@ def write_to_weight_file(weights, model_file, net_depth):
         bias=weights['can/enc/bias:0'],
         dilation_rate=1,
         padding=Padding.Same,
-        activation=Activation.Leaky_relu,
+        activation=Activation.LeakyRelu,
         model_file=model_file)
     for i in range(net_depth-3):
         write_conv_layer(
@@ -77,14 +77,14 @@ def write_to_weight_file(weights, model_file, net_depth):
             bias=weights['can/conv%d/bias:0' % i],
             dilation_rate=2**i,
             padding=Padding.Same,
-            activation=Activation.Leaky_relu,
+            activation=Activation.LeakyRelu,
             model_file=model_file)
     write_conv_layer( 
         kernel=weights['can/dec1/kernel:0'],
         bias=weights['can/dec2/bias:0'],
         dilation_rate=1,
         padding=Padding.Same,
-        activation=Activation.Leaky_relu,
+        activation=Activation.LeakyRelu,
         model_file=model_file)
     write_conv_layer( 
         kernel=weights['can/dec1/kernel:0'],
