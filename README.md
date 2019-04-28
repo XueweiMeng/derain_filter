@@ -28,7 +28,7 @@ Model | PSNR  | SSIM  |
 CAN   | 22.18 | 66.03 |
 
 ## Usage of derain filter
-The model file for derain filter in FFmpeg is models_for_test/derain_RESCAN.model. It is a native version model, so can be used in FFmpeg derain filter directly by the following command:
+The model file for derain filter in FFmpeg is models_for_test/derain_RESCAN.model. It is a native version model, so can be used in FFmpeg derain filter directly by the following command (The images in "testsets" dir can be used as the test images):
 
     ffmpeg -i derain_input.mp4 -vf derain=model=derain_RESCAN.model derain_output.mp4
 
