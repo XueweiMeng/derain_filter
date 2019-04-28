@@ -78,7 +78,7 @@ def main():
         lr_values = [num * args.learning_rate for num in [1., 0.1, 0.01]]
         lr = tf.train.piecewise_constant(
             global_step,
-            boundaries=[args.num_steps * 3 // 4, args.num_steps * 7 // 8],
+            boundaries=[args.num_steps * 2 // 3, args.num_steps * 8 // 9],
             values=lr_values)
         tf.summary.scalar('Learning_rate', lr)
 
