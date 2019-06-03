@@ -1,6 +1,6 @@
 #!/bin/bash
 OUTPUT_DIR='./'
-CKPT_DIR=logdir/train
+CKPT_DIR=logdir/train_derain
 CHANNEL_NUM=24
 NET_DEPTH=7
 
