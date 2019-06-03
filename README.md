@@ -12,7 +12,7 @@ You can download the derain dataset from http://www.icst.pku.edu.cn/struct/Proje
 1. Prepare Rain100H dataset as repo [RESCAN](https://github.com/XiaLiPKU/RESCAN)
 2. cd scripts
 3. ./build_dt.sh
-4. .train_eval.sh
+4. ./train_eval.sh
 
 ## Model generation
 
