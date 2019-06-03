@@ -174,8 +174,10 @@ def main():
         P = O - O_R
         P = tf.clip_by_value(P, 0, 1, name='y')
 
+        ckpt_path = ''
         if os.path.isdir(args.ckpt_dir):
             ckpt_path = tf.train.latest_checkpoint(args.ckpt_dir)
+        
         saver = tf.train.Saver()
         saver.restore(sess, ckpt_path)
 
