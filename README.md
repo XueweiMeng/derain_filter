@@ -32,8 +32,6 @@ The model file for derain filter in FFmpeg is models_for_test/derain_RESCAN.mode
 
     ffmpeg -i derain_input.mp4 -vf derain=model=derain_RESCAN.model derain_output.mp4 (Native)
 
-    ffmpeg -i derain_input.mp4 -vf derain=model=derain_RESCAN.pb:dnn_backend=1 derain_output.mp4 (Tensorflow)
-
 ## Thanks to the Third Party Libs
 [SR](https://github.com/HighVoltageRocknRoll/sr)
 [RESCAN](https://github.com/XiaLiPKU/RESCAN)
