@@ -9,15 +9,24 @@ This repo is a part of GSoC project for derain filter in FFmpeg.
 1. Python>=3.6
 2. Opencv>=3.1.0
 3. Tensorflow>=1.8.0
+4. numpy>=1.12.1
+5. tqdm
 
 ## Dataset Preparation
 You can download the derain dataset from http://www.icst.pku.edu.cn/struct/Projects/joint_rain_removal.html for training or testing.
 
+Rain100H: [http://www.icst.pku.edu.cn/struct/Projects/joint_rain_removal.html][9]<br>
+
+We concatenate the two images(B and O) together as default inputs. If you want to change this setting, just modify dataset.py.
+Moreover, there should be three folders 'train', 'val', 'test' in the dataset folder.
+After download the datasets, don't forget to transform the format!
+
 ## Model training
-1. Prepare Rain100H dataset as repo [RESCAN](https://github.com/XiaLiPKU/RESCAN)
-2. cd scripts
-3. ./build_dt.sh
-4. ./train_eval.sh
+1. Prepare Rain100H dataset
+2. Put the dateset in dir 'datasets/Rain100H', there should be three folders 'train', 'val', 'test' in the dir
+3. cd scripts
+4. ./build_dt.sh
+5. ./train_eval.sh
 
 ## Model generation
 
