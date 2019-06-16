@@ -15,7 +15,7 @@ This repo is a part of GSoC project for derain filter in FFmpeg.
 ## Dataset Preparation
 You can download the derain dataset from http://www.icst.pku.edu.cn/struct/Projects/joint_rain_removal.html for training or testing.
 
-Rain100H: [http://www.icst.pku.edu.cn/struct/Projects/joint_rain_removal.html][9]<br>
+Rain100H: [http://www.icst.pku.edu.cn/struct/Projects/joint_rain_removal.html]<br>
 
 We concatenate the two images(B and O) together as default inputs. If you want to change this setting, just modify dataset.py.
 Moreover, there should be three folders 'train', 'val', 'test' in the dataset folder.
