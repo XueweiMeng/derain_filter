@@ -37,11 +37,12 @@ def _int64_list_feature(value):
     return tf.train.Feature(int64_list=tf.train.Int64List(value=[value]))
 
 
-def _convert_one_samp(file_path, mode, crop_size, stride):
+def _convert_one_samp(file_path_rain, file_path_norain, mode, crop_size, stride):
     """Proprocess the image pair of rain image(O) and background(B).
 
     Args:
-        file_name: The file name of the image pair.
+        file_path_rain: The file path of the rain image.
+        file_path_norain: The file path of the norain image,
         crop_size: Crop size for extracted patches.
         stride: Sliding window stride for cropping.
 
@@ -51,14 +52,16 @@ def _convert_one_samp(file_path, mode, crop_size, stride):
     Raises:
         ValueError: Width of the image pair are odd.
     """
-    image_pair = cv2.imread(file_path)
-    image_pair = cv2.cvtColor(image_pair, cv2.COLOR_BGR2RGB)
-    height, pair_width = image_pair.shape[:-1]
-    width = pair_width // 2
-    if width * 2 != pair_width:
-        raise ValueError('The width of image_pair should be twice of B\'s')
+    image_rain = cv2.imread(file_path_rain)
+    image_norain = cv2.imread(file_path_norain)
+    image_rain = cv2.cvtColor(image_rain, cv2.COLOR_BGR2RGB)
+    image_norain = cv2.cvtColor(image_norain, cv2.COLOR_BGR2RGB)
+    height, width = image_rain.shape[:-1]
+    height_no, width_no = image_norain.shape[:-1]
+    if width != width_no or height != height_no:
+        raise ValueError('The size of rain image should be the same as norain image\'s')
 
-    B, O = image_pair[:, :width], image_pair[:, width:]
+    B, O = image_norain[:, :], image_rain[:, :]
     if mode == 'full':
         crop_height, crop_width = height, width
         stride_height, stride_width = height, width
@@ -66,7 +69,7 @@ def _convert_one_samp(file_path, mode, crop_size, stride):
         crop_height = crop_width = crop_size
         stride_height, stride_width = stride, stride
 
-    file_name = os.path.split(file_path)[-1]
+    file_name = os.path.split(file_path_rain)[-1]
     format_ = file_name.split('.')[-1]
 
     for start_row in range(0, height, stride_height):
@@ -100,11 +103,18 @@ def main():
     examples_num = 0
     writer = tf.python_io.TFRecordWriter(os.path.join(args.dataset_folder,
                                          'dataset.tfrecords'))
-    image_names = os.listdir(os.path.join(args.images_folder))
+    rain_folder = os.path.join(args.images_folder, 'rain');
+    rain_folder = os.path.join(rain_folder, 'X2')
+    norain_folder = os.path.join(args.images_folder, 'norain');
+    image_names = os.listdir(os.path.join(rain_folder))
     image_nums = len(image_names)
     for i in tqdm.tqdm(range(image_nums), total=image_nums, unit='image'):
-        image_path = os.path.join(args.images_folder, image_names[i])
-        example_generator = _convert_one_samp(image_path, args.mode,
+        image_path_rain = os.path.join(rain_folder, image_names[i])
+        image_rain_name = os.path.splitext(image_names[i])[0]
+        image_norain_name = image_rain_name[0:len(image_rain_name) - 2] + os.path.splitext(image_names[i])[-1]
+
+        image_path_norain = os.path.join(norain_folder, image_norain_name)
+        example_generator = _convert_one_samp(image_path_rain, image_path_norain, args.mode,
                                               args.crop_size, args.stride)
         for example in example_generator:
             writer.write(example.SerializeToString())
