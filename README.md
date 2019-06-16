@@ -3,7 +3,12 @@
 This repo contains TensorFlow implementations of following single image deraining models:
 * SCAN &mdash; "Recurrent Squeeze-and-Excitation Context Aggregation Net for Single Image Deraining" [[arxiv]](https://arxiv.org/abs/1807.05698)
 
-This repo is a part of GSoC project for derain filter in ffmpeg.
+This repo is a part of GSoC project for derain filter in FFmpeg.
+
+## Prerequisite
+1. Python>=3.6
+2. Opencv>=3.1.0
+3. Tensorflow>=1.8.0
 
 ## Dataset Preparation
 You can download the derain dataset from http://www.icst.pku.edu.cn/struct/Projects/joint_rain_removal.html for training or testing.
