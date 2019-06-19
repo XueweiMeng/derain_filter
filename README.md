@@ -35,7 +35,7 @@ This repo is a part of GSoC project for derain filter in FFmpeg.
 
 Model | PSNR  | SSIM  |
 ----- | :---: | :---: |
-CAN   | 23.23 | 70.68 |
+CAN   | 23.30 | 70.62 |
 
 ## Usage of derain filter
 The model file for derain filter in FFmpeg is models_for_test/derain_RESCAN.model. It is a native version model, so can be used in FFmpeg derain filter directly by the following command (The images in "testsets" dir can be used as the test images):
