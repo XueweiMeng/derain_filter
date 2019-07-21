@@ -171,8 +171,7 @@ def main():
     with tf.Session() as sess:
         O = tf.placeholder(tf.float32, shape=[1, None, None, 3], name="x")
         O_R = net.forward(O)
-        P = O - O_R
-        P = tf.clip_by_value(P, 0, 1, name='y')
+        P = tf.identity(O_R, name='y')
 
         ckpt_path = ''
         if os.path.isdir(args.ckpt_dir):
