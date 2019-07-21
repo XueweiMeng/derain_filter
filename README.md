@@ -38,9 +38,13 @@ Model | PSNR  | SSIM  |
 CAN   | 23.30 | 70.62 |
 
 ## Usage of derain filter
-The model file for derain filter in FFmpeg is models_for_test/derain_RESCAN.model. It is a native version model, so can be used in FFmpeg derain filter directly by the following command (The images in "testsets" dir can be used as the test images):
+Native model: The native model file for derain filter in FFmpeg is models_for_test/derain_RESCAN.model. It can be used in FFmpeg derain filter directly by the following command (The images in "testsets" dir can be used as the test images):
 
     ffmpeg -i derain_input.mp4 -vf derain=model=derain_RESCAN.model derain_output.mp4 (Native)
+
+Tensorflow model: The tensorflow model file for derain filter in FFmpeg is models_for_test/derain_RESCAN.pb. To enable this model you need to install the TensorFlow for C library (see https://www.tensorflow.org/install/install_c) and configure FFmpeg with --enable-libtensorflow. 
+
+    ffmpeg -i derain_input.mp4 -vf derain=model=derain_RESCAN.pb:dnn_backend=1 derain_output.mp4 (Tensorflow)
 
 ## Thanks to the Third Party Libs
 [SR](https://github.com/HighVoltageRocknRoll/sr)
