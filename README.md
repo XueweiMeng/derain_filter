@@ -1,4 +1,4 @@
-# Derain Filter in FFmpeg
+# Derain and Dehaze Filter in FFmpeg
 
 This repo contains TensorFlow implementations of following single image deraining models:
 * CAN &mdash; "Recurrent Squeeze-and-Excitation Context Aggregation Net for Single Image Deraining" [[arxiv]](https://arxiv.org/abs/1807.05698)
@@ -12,7 +12,7 @@ This repo is a part of GSoC project for derain filter in FFmpeg.
 4. numpy>=1.12.1
 5. tqdm
 
-## Dataset Preparation
+## Dataset Preparation for Derain filter
 1. Download the derain dataset from http://www.icst.pku.edu.cn/struct/Projects/joint_rain_removal.html. 
 2. Download "Rain100H" for testing, get "rain_data_test_Heavy.gz"
 3. Download "Train100H" for training, get "rain_data_train_Heavy.zip"
@@ -21,13 +21,18 @@ This repo is a part of GSoC project for derain filter in FFmpeg.
 6. mkdir datasets/Rain100H_test
 7. tar -xvf rain_data_test_Heavy.gz -C datasets/Rain100H_test
 
+## Dataset Preparation for Dehaze filter
+1. Download the dehaze dataset from https://sites.google.com/view/reside-dehaze-datasets/reside-standard?authuser=0.
+2. Download 'ITS(Indoor Training Set)' for training and testing, get "ITS_v2" dir
+3. cd scripts
+4. ./pre_dataset.sh 
+
 ## Model training
 1. cd scripts
 2. ./build_dt.sh
 3. ./train_eval.sh
 
 ## Model generation
-
 1. cd scripts
 2. ./export_model.sh
 
