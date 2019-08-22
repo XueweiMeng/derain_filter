@@ -29,18 +29,18 @@ This repo is a part of GSoC project for derain filter in FFmpeg.
 
 ## Model training
 1. cd scripts
-2. ./build_dt.sh
-3. ./train_eval.sh
+2. ./build_dt.sh (./build_dt_dehaze.sh for dehaze filter)
+3. ./train_eval.sh (./train_eval_dehaze.sh for dehaze filter)
 
 ## Model generation
 1. cd scripts
-2. ./export_model.sh
+2. ./export_model.sh (./export_model_dehaze.sh for dehaze filter)
 
 ## Benchmark results
 
-Model | PSNR  | SSIM  |
------ | :---: | :---: |
-CAN   | 23.30 | 70.62 |
+Model        | PSNR  | SSIM  |
+---------    | :---: | :---: |
+derain_CAN   | 23.30 | 70.62 |
 
 ## Usage of derain filter
 Native model: The native model file for derain filter in FFmpeg is models_for_test/derain_RESCAN.model. It can be used in FFmpeg derain filter directly by the following command (The images in "testsets" dir can be used as the test images):
