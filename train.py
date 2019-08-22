@@ -7,7 +7,9 @@ import tqdm
 
 import dataset
 import model
+import model_dehaze
 
+FILTER_TYPE='derain'
 BATCH_SIZE = 64
 CHANNEL_NUM = 24
 NET_DEPTH = 7
@@ -26,6 +28,8 @@ def get_arguments():
     """Parse arguments from the input."""
     parser = argparse.ArgumentParser(
         description='train image deraing using Rain100H dataset')
+    parser.add_argument('--filter_type', type=str, default=FILTER_TYPE,
+                        help='filter type derain/dehaze')
     parser.add_argument('--batch_size', type=int, default=BATCH_SIZE,
                         help='Number of images in batch')
     parser.add_argument('--channel_num', type=int, default=CHANNEL_NUM,
@@ -57,7 +61,14 @@ def get_arguments():
 def main():
     """Main entry for training process."""
     args = get_arguments()
-    net = model.Model(args.channel_num, args.net_depth)
+    
+    if args.filter_type == 'derain':
+        net = model.Model(args.channel_num, args.net_depth)
+    elif args.filter_type == 'dehaze':
+        net = model_dehaze.Model(args.channel_num, args.net_depth)
+    else:
+        raise ValueError('Only derain and dehaze filter are supported!')
+
     train_dt = dataset.Dataset('train', args.dataset_path, args.batch_size,
                                shuffle=True, repeat=True)
     data_iter = train_dt.get_data_iterator()

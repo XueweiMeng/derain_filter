@@ -7,6 +7,7 @@ import tqdm
 
 import dataset
 import model
+import model_dehaze
 
 BATCH_SIZE = 1
 CHANNEL_NUM = 24
@@ -15,12 +16,14 @@ DATASET_PATH = 'dataset.tfrecords'
 SAVE_NUM = 10
 LOGDIR = 'evaluation_logdir/default'
 STEPS_PER_LOG = 10
-
+FILTER_TYPE = 'derain'
 
 def get_arguments():
     """Parse arguments from the input."""
     parser = argparse.ArgumentParser(
         description='evaluate image deraining using Rain100H dataset')
+    parser.add_argument('--filter_type', type=str, default=FILTER_TYPE,
+                         help='filter type derain/dehaze filter')
     parser.add_argument('--batch_size', type=int, default=BATCH_SIZE,
                         help='Number of images in batch')
     parser.add_argument('--channel_num', type=int, default=CHANNEL_NUM,
@@ -46,7 +49,14 @@ def get_arguments():
 def main():
     """Main entry for evaluating process."""
     args = get_arguments()
-    net = model.Model(args.channel_num, args.net_depth)
+
+    if args.filter_type == 'derain':
+        net = model.Model(args.channel_num, args.net_depth)
+    elif args.filter_type == 'dehaze':
+        net = model_dehaze.Model(args.channel_num, args.net_depth)
+    else:
+        raise ValueError('Only derain/dehaze filter are supported')
+
     eval_dt = dataset.Dataset('test', args.dataset_path, args.batch_size)
     data_iter = eval_dt.get_data_iterator()
 
