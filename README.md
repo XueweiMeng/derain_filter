@@ -16,16 +16,14 @@ This repo is a part of GSoC project for derain and dehaze filter in FFmpeg.
 1. Download the derain dataset from http://www.icst.pku.edu.cn/struct/Projects/joint_rain_removal.html. 
 2. Download "Rain100H" for testing, get "rain_data_test_Heavy.gz"
 3. Download "Train100H" for training, get "rain_data_train_Heavy.zip"
-4. mkdir datasets
-5. unzip rain_data_train_Heavy.zip -d datasets/Rain100H_train
-6. mkdir datasets/Rain100H_test
-7. tar -xvf rain_data_test_Heavy.gz -C datasets/Rain100H_test
+4. cd scripts
+5. ./pre_dataset_derain.sh
 
 ## Dataset Preparation for Dehaze filter
 1. Download the dehaze dataset from https://sites.google.com/view/reside-dehaze-datasets/reside-standard?authuser=0.
 2. Download 'ITS(Indoor Training Set)' for training and testing, get "ITS_v2" dir
 3. cd scripts
-4. ./pre_dataset.sh 
+4. ./pre_dataset_dehaze.sh 
 
 ## Model training
 1. cd scripts
