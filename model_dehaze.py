@@ -15,8 +15,8 @@ class Model(object):
         with tf.variable_scope('can'):
             x = conv2d(O, self.channel, 3, activation=tf.nn.leaky_relu,
                        name='enc')
-            for i in range(self.depth - 3):
-                dilation = 1
+            dilations = [1, 1, 1, 1]
+            for i, dilation in enumerate(dilations):
                 x = conv2d(x, self.channel, 3, activation=tf.nn.leaky_relu,
                            dilation_rate=(dilation, dilation), 
                            name='conv'+str(i))
