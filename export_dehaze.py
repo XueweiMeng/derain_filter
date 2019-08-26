@@ -6,7 +6,7 @@ import os
 import numpy as np
 import tensorflow as tf
 
-import model
+import model_dehaze
 
 CHANNEL_NUM = 24
 NET_DEPTH = 7
@@ -167,7 +167,7 @@ def main():
     if not os.path.exists(args.output_dir):
         os.mkdir(args.output_dir)
 
-    net = model.Model(args.channel_num, args.net_depth)
+    net = model_dehaze.Model(args.channel_num, args.net_depth)
 
     with tf.Session() as sess:
         O = tf.placeholder(tf.float32, shape=[1, None, None, 3], name="x")
