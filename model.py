@@ -22,7 +22,8 @@ class Model(object):
                            name='conv'+str(i))
             x = conv2d(x, self.channel, 3, activation=tf.nn.leaky_relu,
                        name='dec1')
-            O_R = conv2d(x, 3, 1, activation=None, name='dec2')
+            r = conv2d(x, 3, 1, activation=None, name='dec2')
+            O_R = O - r
 
         return O_R
 
